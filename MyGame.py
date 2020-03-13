@@ -8,7 +8,7 @@ import arcade
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Shape List Demo Person"
+SCREEN_TITLE = "Shape"
 
 
 def make_person(head_radius,
@@ -97,7 +97,7 @@ class MyGame(arcade.Window):
                                       arm_gap,
                                       shoulder_height)
 
-        arcade.set_background_color(arcade.color.AMAZON)
+        arcade.set_background_color(arcade.color.BOLE)
 
     def setup(self):
 
@@ -118,6 +118,7 @@ class MyGame(arcade.Window):
         self.shape_list.center_x += 1
         self.shape_list.center_y += 1
         self.shape_list.angle += .1
+        self.shape_list.angle -=.1
 
 
 def main():
