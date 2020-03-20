@@ -1,10 +1,5 @@
-"""
-Simple program showing how to use a shape list to create a more complex shape
-out of basic ones.
-If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.shape_list_demo_person
-"""
 import arcade
+import math 
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600

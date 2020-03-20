@@ -1,22 +1,4 @@
-"""
-This simple animation example shows how to use classes to animate
-multiple objects on the screen at the same time.
 
-Because this is redraws the shapes from scratch each frame, this is SLOW
-and inefficient.
-
-Using buffered drawing commands (Vertex Buffer Objects) is a bit more complex,
-but faster.
-
-See http://arcade.academy/examples/shapes_buffered.html for this same example
-using shape element lists.
-
-Also, any Sprite class put in a SpriteList and drawn with the SpriteList will
-be drawn using Vertex Buffer Objects for better performance.
-
-If Python and Arcade are installed, this example can be run from the command line with:
-python -m arcade.examples.shapes_buffered
-"""
 
 import arcade
 import random
