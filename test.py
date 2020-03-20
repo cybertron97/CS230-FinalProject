@@ -1,17 +1,22 @@
 
-
+#imports
 import arcade
 import random
+import math 
+import numpy 
 
 # Set up the constants
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
-SCREEN_TITLE = "Shapes!"
+SCREEN_GAME_Height = 300
+SCREEN_GAME_Width = 400
+SCREEN_TITLE = "CS 230 Final Project!"
+
 
 RECT_WIDTH = 50
 RECT_HEIGHT = 50
 
-NUMBER_OF_SHAPES = 200
+NUMBER_OF_SHAPES = 20
 
 
 class Shape:
@@ -60,8 +65,8 @@ class MyGame(arcade.Window):
         self.shape_list = []
 
         for i in range(NUMBER_OF_SHAPES):
-            x = random.randrange(0, SCREEN_WIDTH)
-            y = random.randrange(0, SCREEN_HEIGHT)
+            x = random.randrange(0, SCREEN_GAME_Width)
+            y = random.randrange(0, SCREEN_GAME_Height)
             width = random.randrange(10, 30)
             height = random.randrange(10, 30)
             angle = random.randrange(0, 360)
