@@ -60,6 +60,7 @@ class MyGame(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         self.shape_list = None
         arcade.set_background_color(arcade.color.BOLE)
+        
 
     def setup(self):
         """ Set up the game and initialize the variables. """
