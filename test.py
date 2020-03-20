@@ -3,7 +3,10 @@
 import arcade
 import random
 import math 
-import numpy 
+import os 
+import timeit
+import pymunk 
+
 
 # Set up the constants
 SCREEN_WIDTH = 800
@@ -16,7 +19,24 @@ SCREEN_TITLE = "CS 230 Final Project!"
 RECT_WIDTH = 50
 RECT_HEIGHT = 50
 
-NUMBER_OF_SHAPES = 20
+NUMBER_OF_SHAPES = 1
+
+class PhysicsSprite(arcade.Sprite):
+    def __init__(self, pymunk_shape, filename):
+        super().__init__(filename, center_x=pymunk_shape.body.position.x, center_y=pymunk_shape.body.position.y)
+        self.pymunk_shape = pymunk_shape
+
+class CircleSprite(PhysicsSprite):
+    def __init__(self, pymunk_shape, filename):
+        super().__init__(pymunk_shape, filename)
+        self.width = pymunk_shape.radius * 2
+        self.height = pymunk_shape.radius * 2
+
+class BoxSprite(PhysicsSprite):
+    def __init__(self, pymunk_shape, filename, width, height):
+        super().__init__(pymunk_shape, filename)
+        self.width = width
+        self.height = height
 
 
 class Shape:
@@ -58,8 +78,20 @@ class MyGame(arcade.Window):
 
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
+        file_path = os.path.dirname(os.path.abspath(__file__))
+        os.chdir(file_path)
         self.shape_list = None
         arcade.set_background_color(arcade.color.BOLE)
+        
+        # Pymunk
+        self.space = pymunk.Space()
+        self.space.iterations =10
+        self.space.gravity = (0.0, -900.0)
+        
+        #Sprites---- or Lines
+        self.sprite_list: arcade.SpriteList[PhysicsSprite] = arcade.SpriteList()
+        self.static_lines = []
+
         
 
     def setup(self):
@@ -67,36 +99,32 @@ class MyGame(arcade.Window):
         self.shape_list = []
 
         for i in range(NUMBER_OF_SHAPES):
-            x = random.randrange(0, SCREEN_GAME_Width)
-            y = random.randrange(0, SCREEN_GAME_Height)
-            width = random.randrange(10, 30)
-            height = random.randrange(10, 30)
+            # x = random.randrange(0, SCREEN_GAME_Width)
+            # y = random.randrange(0, SCREEN_GAME_Height)
+            width = random.randrange(10, 100)
+            height = random.randrange(10, 200)
             angle = random.randrange(0, 360)
 
-            d_x = random.randrange(-3, 4)
-            d_y = random.randrange(-3, 4)
-            d_angle = random.randrange(-3, 4)
+            # d_x = random.randrange(-3, 4)
+            # d_y = random.randrange(-3, 4)
+            # d_angle = random.randrange(-3, 4)
 
             red = random.randrange(256)
             green = random.randrange(256)
             blue = random.randrange(256)
             alpha = random.randrange(256)
 
-            shape_type = random.randrange(2)
+            # shape_type = random.randrange(2)
 
-            if shape_type == 0:
-                shape = Rectangle(x, y, width, height, angle, d_x, d_y,
-                                  d_angle, (red, green, blue, alpha))
-            else:
-                shape = Ellipse(x, y, width, height, angle, d_x, d_y,
-                                d_angle, (red, green, blue, alpha))
+            # shape_type == 0:
+            shape = Rectangle(70, 100, 80, 100, 270, 0, 0, 260, (208, 255, 0, 255))
+            # shape = arcade.draw_rectangle_filled(70, 260, 30, 40, arcade.color.BONE)
+            # else:
+            #     shape = Ellipse(x, y, width, height, angle, d_x, d_y,
+            #                     d_angle, (red, green, blue, alpha))
             self.shape_list.append(shape)
 
-    def on_update(self, dt):
-        """ Move everything """
-
-        for shape in self.shape_list:
-            shape.move()
+  
 
     def on_draw(self):
         """
